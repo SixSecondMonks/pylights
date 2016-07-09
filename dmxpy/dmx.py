@@ -2,7 +2,7 @@ from __future__ import print_function
 import serial, sys, time
 
 class Dmx:
-    DEFAULT_PORT = "/dev/cu.usbserial-A6YPVITY"
+    DEFAULT_PORT = "/dev/ttyUSB0"
     START_MSG = 0x7E
     LABEL     = 0x06
     START     = 0x00
@@ -10,11 +10,10 @@ class Dmx:
 
     def __init__(self, port=DEFAULT_PORT):
         self.device = port
-
         try:
             self.port = serial.Serial(port, baudrate = 115200, timeout = 1)
         except:
-            print("Could not initialize device", self.port, ". Exiting.")
+            print("Could not initialize device", self.device, ". Exiting.")
             sys.exit(1)
 
     def write(self, data):
@@ -26,7 +25,7 @@ class Dmx:
         self.port.write(''.join(packet))
 
     def test(self):
-        blank = [0,0,0,0,0,0,0,0] 
+        blank = [0,0,0,0,0,0,0,0]
         red = [100,0,0,255,255,0,0,0]
         purple = [100,0,0,255,255,0,255,0]
 
@@ -61,5 +60,3 @@ class Dmx:
 
     def close(self):
         self.port.close()
-
-
