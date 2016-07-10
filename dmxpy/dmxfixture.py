@@ -8,11 +8,18 @@ class DMXFixture:
 
     def create_packet(self, attrs):
         init = [0 for i in range(self.number_channels)]
-        for (attr, val) in attrs.items():
-            if attr in self.config:
-                key = int(self.config[attr])
-                if key < len(init):
-                    init[key] = val
+        if self.is_dmx:
+            for (attr, val) in attrs.items():
+                if attr in self.config:
+                    key = int(self.config[attr])
+                    if key < len(init):
+                        init[key] = val
+        else:
+            # TODO we assume rgb here
+            for i in range(self.number_channels / 3):
+                init[i*3 + 0] = attrs['red']
+                init[i*3 + 1] = attrs['green']
+                init[i*3 + 2] = attrs['blue']
         return init
 
 if __name__ == '__main__':

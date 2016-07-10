@@ -9,11 +9,11 @@ class Dmx:
     END_MSG   = 0xE7
 
     def __init__(self, port=DEFAULT_PORT):
-        self.device = port
+        self.port = port
         try:
-            self.port = serial.Serial(port, baudrate = 115200, timeout = 1)
+            self.device = serial.Serial(port, baudrate = 115200, timeout = 1)
         except:
-            print("Could not initialize device", self.device, ". Exiting.")
+            print("Could not initialize device", self.port, ". Exiting.")
             sys.exit(1)
 
     def write(self, data):
@@ -22,7 +22,7 @@ class Dmx:
         packet += data
         packet.append(Dmx.END_MSG)
         packet = map(chr, packet)
-        self.port.write(''.join(packet))
+        self.device.write(''.join(packet))
 
     def test(self):
         blank = [0,0,0,0,0,0,0,0]
@@ -59,4 +59,4 @@ class Dmx:
         self.write([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
 
     def close(self):
-        self.port.close()
+        self.device.close()
