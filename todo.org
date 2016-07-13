@@ -1,0 +1,10 @@
+* proper config
+* test w/ sound reactive code
+* pixel pusher ids
+* different programs
+- starburst
+- rainbow (for strings)
+- disco
+- strobe
+- flame
+- sound
