@@ -13,8 +13,8 @@ if len(sys.argv) != 2:
 config = ConfigParser()
 config.readfp(open(sys.argv[1]))
 
-dmx = Dmx()
-pixelpusher = PixelPusher(number=50)
+dmx = Dmx("localhost", 9999)
+# pixelpusher = PixelPusher(number=50)
 
 dmxfixtures = []
 for section in config.sections():
@@ -32,9 +32,10 @@ try:
             data = program.iterative_data()
             packet = df.create_packet(data)
             if df.is_dmx:
-                extra = [0 for _ in range(df.channel_offset - 1)]
-                dmx.write(extra + packet)
+                dmx.fix(df.channel_offset, packet)
             else:
                 pixelpusher.write_dmx(packet)
+        dmx.render()
 except KeyboardInterrupt:
-    pass
+    print('Have a nice day, foo')
+    dmx.close()

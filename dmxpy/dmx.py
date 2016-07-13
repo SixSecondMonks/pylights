@@ -14,7 +14,7 @@ class DmxConnection:
         packet += data
         packet.append(DmxConnection.END_MSG)
         return map(chr, packet)
-        
+
     def write(self, data):
         pass
 
@@ -51,7 +51,7 @@ class DmxTcp(DmxConnection):
         self.socket.send(data)
 
     def close(self):
-        self.socket.close()  
+        self.socket.close()
 
 class Dmx:
     START_MSG = 0x7E
@@ -60,10 +60,23 @@ class Dmx:
     END_MSG   = 0xE7
 
     def __init__(self, destination=DmxSerial.DEFAULT_PORT, tcp_port=None):
+        self.packets = []
         if tcp_port is None:
             self.connection = DmxSerial(destination)
         else:
             self.connection = DmxTcp(destination, tcp_port)
+
+    def fix(self, offset, data):
+        self.packets.append((offset, data))
+
+    def render(self):
+        maxsize = max(map(lambda (o, d): o + len(d), self.packets))
+        data = [0 for _ in range(maxsize)]
+        for (offset, p) in self.packets:
+            for index, n in enumerate(range(offset - 1, offset - 1 + len(p))):
+                data[n] = p[index]
+        self.write(data)
+        self.packets = []
 
     def write(self, data):
         size = len(data) + 1
