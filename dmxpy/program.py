@@ -5,7 +5,8 @@ from dmx import Dmx
 import sys
 
 class Program(object):
-    def __init__(self):
+    def __init__(self, name='test'):
+        self.name = name
         self.run()
 
     def initial_data():

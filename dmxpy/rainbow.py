@@ -5,7 +5,7 @@ class Rainbow(Program):
     def __init__(self):
         self.iteration = 0
         self.n = 0
-        super(Rainbow, self).__init__()
+        super(Rainbow, self).__init__('rainbow')
 
     def initial_data(self):
         return dict([('intensity', 100), ('speed', 0xff), ('red', 0x0), ('blue', 0x0), ('green', 0xff)])
