@@ -86,37 +86,6 @@ class Dmx:
         packet = map(chr, packet)
         self.connection.write(''.join(packet))
 
-    def test(self):
-        blank = [0,0,0,0,0,0,0,0]
-        red = [100,0,0,255,255,0,0,0]
-        purple = [100,0,0,255,255,0,255,0]
-
-        x = 0
-        while True:
-            command = []
-            for y in range(1,3):
-                command += blank
-            if x % 2 == 0:
-                command += red
-                x += 1
-            else:
-                command += purple
-                x -= 1
-            self.write(command)
-            time.sleep(1)
-
-    def testa(self):
-        purple = [255,0,0,255,255,0,255,0]
-        blank = [0,0,0,0,0,0,0,0]
-        for x in range(1,18):
-            command = []
-            for y in range(1,x):
-                command += blank
-            command += purple
-            self.write(command)
-            print("sent", command, "to address", x)
-            time.sleep(1)
-
     def clear(self):
         self.write([0] * 512)
 

@@ -16,5 +16,8 @@ class PixelPusher:
             print("Could not initialize device", self.port, ". Exiting.")
             sys.exit(1)
 
-    def write_dmx(self, data):
+    def fix(self, data):
         self.device._update(data)
+
+    def render(self):
+        pass
