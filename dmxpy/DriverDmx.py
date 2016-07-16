@@ -6,10 +6,11 @@ class Fixture:
     @classmethod
     def create_packet(cls, r, g, b):
         packet = [0] * 9
-        packet[4] = 0xff
-        packet[5] = r
-        packet[6] = g
-        packet[7] = b
+        packet[2] = 0xff
+        packet[3] = 100
+        packet[4] = r
+        packet[5] = g
+        packet[6] = b
         return packet
 
 class DriverDmx(DriverBase):
@@ -18,7 +19,7 @@ class DriverDmx(DriverBase):
     START     = 0x00
     END_MSG   = 0xE7
 
-    def __init__(self, num, port='/dev/ttyS0'):
+    def __init__(self, num, port='/dev/ttyUSB0'):
         super(DriverDmx, self).__init__(num)
         self.port = port
         self.intensity = 255

@@ -4,5 +4,6 @@ from Rainbows import RainbowCycle
 driver = DriverDmx(1)
 led = LEDStrip(driver)
 anim = RainbowCycle(led)
-anim.run(fps=5)
+anim.run(fps=240)
+#anim.run()
 
