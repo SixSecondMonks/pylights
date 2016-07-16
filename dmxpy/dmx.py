@@ -79,9 +79,9 @@ class Dmx:
         self.packets = []
 
     def write(self, data):
+        print(data)
         size = len(data) + 1
         packet = [Dmx.START_MSG, Dmx.LABEL, size & 255, (size >> 8) & 255, Dmx.START]
-        print(data)
         packet += data
         packet.append(Dmx.END_MSG)
         print(packet)
