@@ -81,8 +81,10 @@ class Dmx:
     def write(self, data):
         size = len(data) + 1
         packet = [Dmx.START_MSG, Dmx.LABEL, size & 255, (size >> 8) & 255, Dmx.START]
+        print(data)
         packet += data
         packet.append(Dmx.END_MSG)
+        print(packet)
         packet = map(chr, packet)
         self.connection.write(''.join(packet))
 
