@@ -20,6 +20,7 @@ class Rainbow(Program):
         data['red'] = r
         data['green'] = g
         data['blue'] = b
+        print "iterative data: ", data
         return data
 
 if __name__ == "__main__":

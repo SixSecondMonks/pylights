@@ -24,6 +24,9 @@ class Program(object):
             while True:
                 for df in fixtures:
                     data = self.iterative_data()
+                    data['red'] = 0xaa
+                    data['green'] = 0xab
+                    data['blue'] = 0xba
                     packet = df.create_packet(data)
                     if df.is_dmx:
                         dmx.fix(df.channel_offset, packet)

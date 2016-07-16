@@ -67,6 +67,7 @@ class Dmx:
             self.connection = DmxTcp(destination, tcp_port)
 
     def fix(self, offset, data):
+        print("fix", data)
         self.packets.append((offset, data))
 
     def render(self):
@@ -87,6 +88,8 @@ class Dmx:
         print(packet)
         packet = map(chr, packet)
         self.connection.write(''.join(packet))
+        import time
+        time.sleep(1/60.)
 
     def clear(self):
         self.write([0] * 512)
