@@ -5,11 +5,11 @@ import serial, sys
 class Fixture:
     @classmethod
     def create_packet(cls, r, g, b):
-        packet = [0] * 8
-        packet[3] = 0xff
-        packet[4] = r
-        packet[5] = g
-        packet[6] = b
+        packet = [0] * 9
+        packet[4] = 0xff
+        packet[5] = r
+        packet[6] = g
+        packet[7] = b
         return packet
 
 class DriverDmx(DriverBase):
@@ -33,7 +33,7 @@ class DriverDmx(DriverBase):
         self._fixData(data)
         p = Fixture.create_packet(self._buf[0], self._buf[1], self._buf[2])
         print(p)
-        size = len(p) + 2
+        size = len(p) + 1
         packet = [DriverDmx.START_MSG, DriverDmx.LABEL, size & 255, (size >> 8), DriverDmx.START]
         packet += p
         packet.append(DriverDmx.END_MSG)
