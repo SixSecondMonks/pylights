@@ -36,7 +36,8 @@ class DriverDmx(DriverBase):
         packet = [DriverDmx.START_MSG, DriverDmx.LABEL, size & 255, (size >> 8), DriverDmx.START]
         packet += p
         packet.append(DriverDmx.END_MSG)
-        self.device.write(packet)
+        packet = map(chr, packet)
+        self.device.write(''.join(packet))
 
     def setMasterBrightness(self, brightness):
         self.intensity = brightness
