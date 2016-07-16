@@ -16,7 +16,8 @@ class Program(object):
         pass
 
     def run(self):
-        dmx = Dmx("pylights", 9999)
+#        dmx = Dmx("pylights", 9999)
+        dmx = Dmx()
         # pixelpusher = PixelPusher(number=50)
         fixtures = read_config(sys.argv)
         try:
