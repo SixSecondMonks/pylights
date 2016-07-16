@@ -22,5 +22,21 @@ class Rainbow(Program):
         data['blue'] = b
         return data
 
+    def step(self, fixtures):
+        import itertools
+        WIDTH=10
+        HEIGHT=5
+        pp = fixtures[3]
+        frame = [[0,0,0]] * (pp.number_channels / 3)
+        
+        for pixel in range(len(frame)):
+            row = pixel / WIDTH
+            frame[pixel] = create_hue(25+((self.n+row)%HEIGHT)*51)
+
+        self.n += 1
+        return list(itertools.chain.from_iterable(frame))
+
+ 
+
 if __name__ == "__main__":
     Rainbow()

@@ -1,3 +1,5 @@
+# Describes a DMX Universe
+
 from __future__ import print_function
 import serial, sys, time
 import socket
