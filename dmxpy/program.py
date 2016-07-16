@@ -36,4 +36,5 @@ class Program(object):
                 #pixelpusher.render()
         except KeyboardInterrupt:
             print(self.name, 'terminated')
+            dmx.clear()
             dmx.close()
