@@ -32,7 +32,8 @@ class DriverDmx(DriverBase):
     def update(self, data):
         self._fixData(data)
         p = Fixture.create_packet(self._buf[0], self._buf[1], self._buf[2])
-        size = len(p) + 1
+        print(p)
+        size = len(p) + 2
         packet = [DriverDmx.START_MSG, DriverDmx.LABEL, size & 255, (size >> 8), DriverDmx.START]
         packet += p
         packet.append(DriverDmx.END_MSG)
