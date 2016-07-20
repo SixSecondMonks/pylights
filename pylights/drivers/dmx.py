@@ -14,7 +14,7 @@ class DriverDmx(DriverBase):
         super(DriverDmx, self).__init__(num=len(fixtures))
         self.fixtures = fixtures
         self.port = port
-
+        self.intensity = 0x0
         self.device = serial.Serial(port, baudrate=115200, timeout=1)
 
     @staticmethod
@@ -32,7 +32,7 @@ class DriverDmx(DriverBase):
         data = [0 for _ in range(maxsize)]
         for i in range(len(self.fixtures)):
             offset = self.fixtures[i].offset
-            packet = self.fixtures[i].create_packet({'intensity':0xff, 'speed':0xff, 'red':self._buf[i * 3 + 0], 'green':self._buf[i * 3 + 1], 'blue': self._buf[i * 3 + 2]})
+            packet = self.fixtures[i].create_packet({'intensity':self.intensity, 'speed':0xff, 'red':self._buf[i * 3 + 0], 'green':self._buf[i * 3 + 1], 'blue': self._buf[i * 3 + 2]})
             
             for index, n in enumerate(range(offset - 1, offset - 1 + len(packet))):
                 data[n] = packet[index]
@@ -40,7 +40,7 @@ class DriverDmx(DriverBase):
         packet = DriverDmx.packetize(data)
         self.device.write(''.join(packet))
 
-#    def setMasterBrightness(self, brightness):
-#        self.intensity = brightness
+    def setMasterBrightness(self, brightness):
+        self.intensity = brightness & 0xff
 
 

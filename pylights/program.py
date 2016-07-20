@@ -8,8 +8,9 @@ from drivers.dmx import DriverDmx
 import sys, itertools
 
 class Program(object):
-    def __init__(self, name='test'):
+    def __init__(self, name='test', fps=60):
         self.name = name
+        self.fps = fps
         self.run()
 
     @staticmethod
@@ -58,7 +59,7 @@ class Program(object):
         led = LEDStrip(drivers)
         anim = self.get_animation(led)
         try:
-            anim.run(fps=60)
+            anim.run(fps=self.fps)
         except KeyboardInterrupt:
             print(self.name, 'terminated')
 
