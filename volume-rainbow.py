@@ -1,5 +1,5 @@
 from pylights.program import Program
-from animations.Rainbows import RainbowCycleAudio
+from animations.RainbowsMixed import RainbowCycleAudio
 
 class Rainbow(Program):
     def __init__(self):
