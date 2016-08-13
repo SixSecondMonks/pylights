@@ -1,4 +1,6 @@
 from bibliopixel.animation import BaseStripAnim, BaseMatrixAnim
+from audioop import rms
+from math import log10
 import pyaudio
 
 RATE  = 44100
@@ -7,9 +9,11 @@ CHUNK = 1024
 class AudioMixin:
     def __init__(self):
         self.volume = 1
-        
+        self.decibels = 1
+
         def get_volume(data, frame_count, time_info, status):
             self.volume = rms(data, 2)
+            self.decibels = 20 * log10(self.volume)
             return (data, pyaudio.paContinue)
 
         self.py_audio = pyaudio.PyAudio()
