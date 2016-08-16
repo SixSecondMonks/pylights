@@ -21,6 +21,9 @@ class AudioMixin:
         self.py_audio_stream.start_stream()
 
 class StripAnim(BaseStripAnim, AudioMixin):
+    def __init__(self, led, start, end):
+        super(StripAnim, self).__init__(led, start, end)
+        super(StripAnim, self).__init__()
     pass
 
 class MatrixAnim(BaseMatrixAnim, AudioMixin):
