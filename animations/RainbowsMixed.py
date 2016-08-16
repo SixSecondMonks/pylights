@@ -8,7 +8,6 @@ class RainbowCycleAudio(StripAnim):
         super(RainbowCycleAudio, self).__init__(led, start, end)
 
     def step(self, amt = 1):
-        print dir(self)
         for i in range(self._size):
             c = colors.hue_helper(i, self._size, self._step)
             d = self.decibels

@@ -6,12 +6,11 @@ import pyaudio
 RATE  = 44100
 CHUNK = 1024
 
-class AudioMixin:
-    def __init__(self):
+class AudioMixin(object):
+    def __init__(self, led, start, end):
+        super(AudioMixin, self).__init__(led, start, end)
         self.volume = 1
         self.decibels = 1
-
-        print "hi!"
 
         def get_volume(data, frame_count, time_info, status):
             self.volume = rms(data, 2)
@@ -22,7 +21,7 @@ class AudioMixin:
         self.py_audio_stream = self.py_audio.open(format=pyaudio.paInt16, channels=1, input_device_index=7, rate=RATE, input=True, frames_per_buffer=CHUNK, stream_callback=get_volume)
         self.py_audio_stream.start_stream()
 
-class StripAnim(BaseStripAnim, AudioMixin):
+class StripAnim(AudioMixin, BaseStripAnim):
     def __init__(self, led, start, end):
         super(StripAnim, self).__init__(led, start, end)
 
