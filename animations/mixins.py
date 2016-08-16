@@ -11,6 +11,8 @@ class AudioMixin:
         self.volume = 1
         self.decibels = 1
 
+        print "hi!"
+
         def get_volume(data, frame_count, time_info, status):
             self.volume = rms(data, 2)
             self.decibels = 20 * log10(self.volume)
@@ -23,8 +25,6 @@ class AudioMixin:
 class StripAnim(BaseStripAnim, AudioMixin):
     def __init__(self, led, start, end):
         super(StripAnim, self).__init__(led, start, end)
-        super(StripAnim, self).__init__()
-    pass
 
 class MatrixAnim(BaseMatrixAnim, AudioMixin):
     pass
