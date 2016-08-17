@@ -8,5 +8,9 @@ class Rainbow(Program):
     def get_animation(self, led):
         return RainbowCycle(led)
 
-if __name__ == "__main__":
+def run():
+    print('running Rainbow')
     Rainbow()
+
+if __name__ == "__main__":
+    run()

@@ -8,5 +8,9 @@ class VolumeRainbow(Program):
     def get_animation(self, led):
         return RainbowCycleAudio(led)
 
-if __name__ == "__main__":
+def run():
+    print('running VolumeRainbow')
     VolumeRainbow()
+
+if __name__ == "__main__":
+    run()

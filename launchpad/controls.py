@@ -57,6 +57,15 @@ def keypressed(message):
     fn = process_control if message.type == 'control_change' else process_button
     return fn(message)
 
+def loop():
+    try:
+        for message in input:
+            translation = keypressed(message)
+            if translation:
+                yield translation
+    except KeyboardInterrupt:
+        input.close()
+
 if __name__ == '__main__':
     try:
         for message in input:
