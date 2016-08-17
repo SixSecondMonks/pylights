@@ -1,12 +1,12 @@
 from pylights.program import Program
 from animations.RainbowsMixed import RainbowCycleAudio
 
-class Rainbow(Program):
+class VolumeRainbow(Program):
     def __init__(self):
-        super(Rainbow, self).__init__('rainbow')
+        super(VolumeRainbow, self).__init__('rainbow')
 
     def get_animation(self, led):
         return RainbowCycleAudio(led)
 
 if __name__ == "__main__":
-    Rainbow()
+    VolumeRainbow()

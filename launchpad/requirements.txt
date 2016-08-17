@@ -1,0 +1,2 @@
+# on arch, portmidi must be installed too
+mido
