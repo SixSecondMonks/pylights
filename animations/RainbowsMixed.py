@@ -16,8 +16,7 @@ class RainbowCycleAudio(StripAnim):
             percentage = d / 20
             percentage = min(percentage, 1.0)
             brightness = int(round(percentage * 255))
-            self._led.setMasterBrightness(brightness)
-            self._led.set(self._start + i, c)
+            self._led.set(self._start + i, colors.color_scale(c, brightness))
 
         self._step += amt
         overflow = self._step - 256
