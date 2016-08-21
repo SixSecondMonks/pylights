@@ -2,6 +2,7 @@ from __future__ import print_function
 from ConfigParser import ConfigParser
 from bibliopixel.drivers.serial_driver import DriverSerial, LEDTYPE
 from bibliopixel.drivers.visualizer import DriverVisualizer
+from bibliopixel.drivers.dummy_driver import DriverDummy
 from bibliopixel import LEDStrip
 from drivers.fixtures import DmxFixture
 from drivers.dmx import DriverDmx
@@ -58,6 +59,15 @@ class Program(object):
                     drivers.append(d)
                 except TypeError as e:
                     print("error adding visualizer", e)
+            elif driver == 'dummy':
+                light = dict(config.items(list(lights)[0]))
+                try:
+                    num_pixels = int(light['length'])
+                    print("num: ", num_pixels)
+                    d = DriverDummy(num=num_pixels)
+                    drivers.append(d)
+                except:
+                    print("fuck")
 
         return drivers
 
