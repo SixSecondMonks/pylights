@@ -1,7 +1,9 @@
 from launchpad import controls
 import os
+from multiprocessing import Process, Queue
 import imp
 from string import ascii_lowercase
+from time import sleep
 
 # list modes
 modelisting = os.walk('modes/').next()[2]
@@ -22,7 +24,15 @@ def run_mode(m):
 mode_map = dict([(coord(i), run_mode(m)) for i, m in enumerate(modes)])
 print(mode_map)
 
+p = None # no current process
+
 for pressed in controls.loop():
     print('pressed', pressed)
     if pressed['coordinate'] and pressed['coordinate'] in mode_map.keys():
-        mode_map[pressed['coordinate']]()
+        if p is not None:
+            p.terminate()
+            sleep(1)
+
+        mode = mode_map[pressed['coordinate']]
+        p = Process(target=mode)
+        p.start()
