@@ -19,10 +19,12 @@ def coord(index):
 def run_mode(m):
     name = m.replace('.py', '')
     imported_mode = imp.load_source(name, 'modes/' + m)
-    return imported_mode.run
+    return imported_mode
 
 mode_map = dict([(coord(i), run_mode(m)) for i, m in enumerate(modes)])
-print(mode_map)
+
+for (k,v) in mode_map.iteritems():
+    print k, "will run", v.__name__
 
 p = None # no current process
 
@@ -34,5 +36,5 @@ for pressed in controls.loop():
             sleep(1)
 
         mode = mode_map[pressed['coordinate']]
-        p = Process(target=mode)
+        p = Process(target=mode.run)
         p.start()
