@@ -6,7 +6,6 @@ from bibliopixel.drivers.dummy_driver import DriverDummy
 from bibliopixel import LEDStrip
 from drivers.fixtures import DmxFixture
 from drivers.dmx import DriverDmx
-from os import getpid
 import math
 
 import sys, itertools
@@ -15,11 +14,10 @@ class Program(object):
     def __init__(self, name='test', fps=60):
         self.name = name
         self.fps = fps
-        print("PID: ", getpid())
+        self.audio_port = None
         self.run()
 
-    @staticmethod
-    def read_config(args):
+    def read_config(self, args):
         if len(args) != 2:
             print('Usage: ', args[0], '<config file>')
             sys.exit(1)
@@ -54,20 +52,22 @@ class Program(object):
                 light = dict(config.items(list(lights)[0]))
                 try:
                     num_pixels = int(math.sqrt(int(light['length'])))
-                    print("num: ", num_pixels)
                     d = DriverVisualizer(width=num_pixels, height=num_pixels)
                     drivers.append(d)
-                except TypeError as e:
-                    print("error adding visualizer", e)
+                except:
+                    print("error adding visualizer")
             elif driver == 'dummy':
                 light = dict(config.items(list(lights)[0]))
+                print(light)
                 try:
                     num_pixels = int(light['length'])
-                    print("num: ", num_pixels)
                     d = DriverDummy(num=num_pixels)
                     drivers.append(d)
                 except:
-                    print("fuck")
+                    print("error adding dummy, you dummy")
+            elif driver == 'audio':
+                light = dict(config.items(list(lights)[0]))
+                self.audio_port = int(port)
 
         return drivers
 
@@ -77,7 +77,7 @@ class Program(object):
     def run(self):
         drivers = self.read_config(sys.argv)
         if len(drivers) == 0:
-            print("lol, bye")
+            print("no drivers, quitting")
             sys.exit(0)
         led = LEDStrip(drivers)
         anim = self.get_animation(led)

@@ -4,8 +4,8 @@ from mixins import StripAnim
 class RainbowCycleAudio(StripAnim):
     """Generate rainbow wheel equally distributed over strip."""
 
-    def __init__(self, led, start=0, end=-1):
-        super(RainbowCycleAudio, self).__init__(led, start, end)
+    def __init__(self, device_index, led, start=0, end=-1):
+        super(RainbowCycleAudio, self).__init__(device_index, led, start, end)
 
     def step(self, amt = 1):
         for i in range(self._size):
