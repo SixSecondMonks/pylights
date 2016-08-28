@@ -20,7 +20,6 @@ class Rainbow(BaseStripAnim):
     def step(self, amt = 1):
         for i in range(self._size):
             h = (i + self._step) % 255
-            print colors.hue2rgb_rainbow(h)
             self._led.set(self._start + i, colors.hue2rgb_rainbow(h))
 
         self._step += amt
@@ -37,7 +36,6 @@ class RainbowCycle(BaseStripAnim):
     def step(self, amt = 1):
         for i in range(self._size):
             c = colors.hue_helper(i, self._size, self._step)
-            print c
             self._led.set(self._start + i, c)
 
         self._step += amt

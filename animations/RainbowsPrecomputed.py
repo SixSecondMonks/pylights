@@ -15,7 +15,8 @@ class RainbowCycle(BaseStripAnim):
         super(RainbowCycle, self).__init__(led, start, end)
         print(self._size)
 #        self.frames = [[colors.hue_helper(c, self._size, i) for c in range(self._size)] for i in range(255)]
-        self.frames = [    list(sum([colors.hue_helper(c, self._size, i) for c in range(self._size)], ()))     for i in range(255)]
+        frames = [    list(sum([colors.hue_helper(c, self._size, i) for c in range(self._size)], ()))     for i in range(255)]
+        self.frames = map(lambda x: colors.color_scale(x, 175), frames)
 
     def step(self, amt = 1):
 #        print(self._step, self._step % 255)

@@ -79,7 +79,7 @@ class Program(object):
         if len(drivers) == 0:
             print("no drivers, quitting")
             sys.exit(0)
-        led = LEDStrip(drivers)
+        led = LEDStrip(drivers, threadedUpdate=True)
         anim = self.get_animation(led)
         try:
             anim.run(fps=self.fps)

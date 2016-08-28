@@ -3,7 +3,7 @@ from animations.basic import ColorFade
 
 class RedFade(Program):
     def __init__(self):
-        super(RedFade, self).__init__('red fade', fps=30)
+        super(RedFade, self).__init__('red fade', fps=None)
 
     def get_animation(self, led):
         hue = 0
