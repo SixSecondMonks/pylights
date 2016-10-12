@@ -44,7 +44,6 @@ class RotatingColors(BaseStripAnim):
         # ex: [50, 169, 100, 169, 50]
 
 	total = sum(self.bounds)
-        print self._step
         pos = 0
         for i in range(len(self.bounds)):
             for j in range(self.bounds[i]):
